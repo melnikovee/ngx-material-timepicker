@@ -26,18 +26,21 @@ export class TimeAdapter {
         const {format} = opts;
         const parsedTime = TimeAdapter.parseTime(time, opts).setLocale(TimeAdapter.DEFAULT_LOCALE);
 
-        if (format !== 24) {
-            return parsedTime.toLocaleString({
-                ...DateTime.TIME_SIMPLE,
-                hour12: format !== 24,
-                numberingSystem: TimeAdapter.DEFAULT_NUMBERING_SYSTEM
+        if (!!parsedTime) {
+            if (format !== 24) {
+                return parsedTime.toLocaleString({
+                    ...DateTime.TIME_SIMPLE,
+                    hour12: format !== 24,
+                    numberingSystem: TimeAdapter.DEFAULT_NUMBERING_SYSTEM
+                }).replace(/\u200E/g, '');
+            }
+            return parsedTime.toISOTime({
+                includeOffset: false,
+                suppressMilliseconds: true,
+                suppressSeconds: true
             }).replace(/\u200E/g, '');
         }
-        return parsedTime.toISOTime({
-            includeOffset: false,
-            suppressMilliseconds: true,
-            suppressSeconds: true
-        }).replace(/\u200E/g, '');
+        return time;
     }
 
     static toLocaleTimeString(time: string, opts: TimeOptions = {}): string {
