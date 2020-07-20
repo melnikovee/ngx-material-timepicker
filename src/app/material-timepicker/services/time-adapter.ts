@@ -1,9 +1,9 @@
-import { DateTime, LocaleOptions } from 'luxon';
+import {DateTime, LocaleOptions} from 'luxon';
 
-import { TimeFormat } from '../models/time-format.enum';
-import { TimePeriod } from '../models/time-period.enum';
-import { isBetween, isSameOrAfter, isSameOrBefore } from '../utils/timepicker.utils';
-import { TimeOptions } from '../models/time-options.interface';
+import {TimeFormat} from '../models/time-format.enum';
+import {TimePeriod} from '../models/time-period.enum';
+import {isBetween, isSameOrAfter, isSameOrBefore} from '../utils/timepicker.utils';
+import {TimeOptions} from '../models/time-options.interface';
 
 // @dynamic
 export class TimeAdapter {
@@ -26,14 +26,14 @@ export class TimeAdapter {
         const {format} = opts;
         const parsedTime = TimeAdapter.parseTime(time, opts).setLocale(TimeAdapter.DEFAULT_LOCALE);
 
-        if (!!parsedTime) {
-            if (format !== 24) {
-                return parsedTime.toLocaleString({
-                    ...DateTime.TIME_SIMPLE,
-                    hour12: format !== 24,
-                    numberingSystem: TimeAdapter.DEFAULT_NUMBERING_SYSTEM
-                }).replace(/\u200E/g, '');
-            }
+        if (format !== 24) {
+            return parsedTime.toLocaleString({
+                ...DateTime.TIME_SIMPLE,
+                hour12: format !== 24,
+                numberingSystem: TimeAdapter.DEFAULT_NUMBERING_SYSTEM
+            }).replace(/\u200E/g, '');
+        }
+        if (parsedTime.isValid) {
             return parsedTime.toISOTime({
                 includeOffset: false,
                 suppressMilliseconds: true,

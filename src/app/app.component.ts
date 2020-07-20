@@ -1,6 +1,6 @@
 /* tslint:disable:max-line-length */
-import { Component } from '@angular/core';
-import { NgxMaterialTimepickerTheme } from './material-timepicker/models/ngx-material-timepicker-theme.interface';
+import {Component} from '@angular/core';
+import {NgxMaterialTimepickerTheme} from './material-timepicker/models/ngx-material-timepicker-theme.interface';
 
 @Component({
     selector: 'app-root',

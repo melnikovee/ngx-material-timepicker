@@ -28,6 +28,19 @@
                     <p class="ngx-material-timepicker-example__description">
                         Simple timepicker settings
                     </p>
+                    <div class="time-column-field">
+                        <input matInput
+                               maxlength="5"
+                               name="timeStart"
+                               [ngxTimepicker]="timePick"
+                               [format]="24"
+                               [disableClick]="true">
+                        <button mat-button matSuffix mat-icon-button type="button" tabIndex="-1"
+                                (click)="timePick.open()">
+                            <mat-icon>schedule</mat-icon>
+                        </button>
+                        <ngx-material-timepicker #timePick></ngx-material-timepicker>
+                    </div>
                     <div class="ngx-material-timepicker-example__form-group">
                         <input placeholder="12hr format (default settings)" aria-label="12hr format"
                                [ngxTimepicker]="defaultPicker" readonly>
